@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>京北・美山、山ふところをめぐる一日 | 日帰り体験ツアー</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #201d17;
+    --indigo: #22384c;
+    --indigo-deep: #16232f;
+    --water: #4c8c96;
+    --water-pale: #a9c9c9;
+    --paper: #efe6d8;
+    --paper-warm: #e6dac6;
+    --moss: #5c6e4f;
+    --wood: #8b6a4f;
+    --stamp: #a8452e;
+    --line: rgba(32, 29, 23, 0.16);
+    --max-w: 1040px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 400;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display {
+    font-family: "Shippori Mincho", serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--indigo-deep);
+    margin: 0;
+  }
+
+  a { color: inherit; }
+
+  img, svg { display: block; max-width: 100%; }
+
+  .wrap {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--stamp);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  /* ---------- Header strip ---------- */
+  .topline {
+    background: var(--indigo-deep);
+    color: var(--water-pale);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    padding: 9px 0;
+  }
+  .topline .wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .back-link {
+    color: var(--water-pale);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(169, 201, 201, 0.5);
+  }
+  .back-link:hover { color: #fff; }
+
+  /* ---------- Tab nav ---------- */
+  .tabnav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  .tabnav .wrap {
+    display: flex;
+    gap: 4px;
+  }
+  .tab-btn {
+    appearance: none;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font: inherit;
+    font-size: 0.92rem;
+    color: var(--wood);
+    padding: 16px 6px;
+    margin-right: 30px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+  }
+  .tab-btn.active {
+    color: var(--indigo-deep);
+    border-bottom-color: var(--stamp);
+    font-weight: 500;
+  }
+  .tab-btn:hover { color: var(--indigo-deep); }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* ---------- Car guide ---------- */
+  .car-hero {
+    background: var(--indigo-deep);
+    color: var(--paper);
+    padding: 56px 0;
+  }
+  .car-hero .eyebrow {
+    color: var(--water-pale);
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+  }
+  .car-hero h1 {
+    color: #fbf7ee;
+    font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+    line-height: 1.5;
+    max-width: 22ch;
+  }
+  .car-hero p {
+    margin-top: 18px;
+    color: var(--water-pale);
+    max-width: 48ch;
+    font-size: 0.98rem;
+  }
+
+  .car-section { padding: 64px 0; }
+  .car-section + .car-section { border-top: 1px solid var(--line); }
+  .car-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 34px;
+  }
+
+  .car-steps {
+    counter-reset: carstep;
+    display: grid;
+    gap: 0;
+  }
+  .car-step {
+    counter-increment: carstep;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+  .car-step:last-child { border-bottom: 1px solid var(--line); }
+  .car-step::before {
+    content: counter(carstep);
+    font-family: "Shippori Mincho", serif;
+    font-size: 1.3rem;
+    color: var(--stamp);
+  }
+  .car-step h3 { font-size: 1.05rem; margin-bottom: 6px; }
+  .car-step p { margin: 0; font-size: 0.94rem; color: #3a352b; }
+
+  .caution-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .caution-card {
+    background: var(--paper-warm);
+    border-left: 3px solid var(--moss);
+    padding: 20px 22px;
+  }
+  .caution-card h3 { font-size: 1rem; margin-bottom: 8px; }
+  .caution-card p { margin: 0; font-size: 0.92rem; color: #3a352b; }
+
+  .emergency-block {
+    background: var(--indigo-deep);
+  }
+  .emergency-block h2 { color: var(--paper); }
+  .emergency-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .emergency-table tr {
+    border-top: 1px solid rgba(169, 201, 201, 0.25);
+  }
+  .emergency-table tr:last-child { border-bottom: 1px solid rgba(169, 201, 201, 0.25); }
+  .emergency-table th, .emergency-table td {
+    text-align: left;
+    padding: 18px 14px;
+    font-weight: 400;
+  }
+  .emergency-table th {
+    color: var(--water-pale);
+    font-size: 0.88rem;
+    width: 30%;
+  }
+  .emergency-table td {
+    color: #fbf7ee;
+    font-size: 1.05rem;
+    font-family: "Shippori Mincho", serif;
+  }
+  .emergency-table td .sub {
+    display: block;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 0.82rem;
+    color: var(--water-pale);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .caution-grid { grid-template-columns: 1fr; }
+    .emergency-table th, .emergency-table td { padding: 14px 8px; }
+    .tab-btn { margin-right: 18px; font-size: 0.86rem; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    background: linear-gradient(180deg, var(--indigo) 0%, var(--indigo-deep) 100%);
+    color: var(--paper);
+    overflow: hidden;
+    padding-bottom: 0;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: 20px;
+    padding: 64px 0 0;
+  }
+  .hero-text .kicker {
+    font-size: 0.92rem;
+    color: var(--water-pale);
+    margin: 0 0 18px;
+    font-family: "Noto Sans JP", sans-serif;
+    letter-spacing: 0.04em;
+  }
+  .hero-text h1 {
+    font-size: clamp(2.1rem, 4.6vw, 3.3rem);
+    line-height: 1.4;
+    color: #fbf7ee;
+  }
+  .hero-text .sub {
+    margin-top: 22px;
+    font-size: 1.02rem;
+    color: var(--water-pale);
+    max-width: 34ch;
+  }
+  .hero-illust { width: 100%; height: auto; }
+
+  .facts {
+    background: var(--paper-warm);
+    border-top: 1px solid var(--line);
+  }
+  .facts-row {
+    display: block;
+  }
+  .fact {
+    padding: 22px 0;
+    border-right: none;
+  }
+  .fact .label {
+    font-size: 0.78rem;
+    color: var(--wood);
+    margin-bottom: 6px;
+  }
+  .fact .value {
+    font-family: "Shippori Mincho", serif;
+    font-size: 1.15rem;
+    color: var(--indigo-deep);
+  }
+
+  @media (max-width: 760px) {
+    .hero-grid { grid-template-columns: 1fr; padding-top: 44px; }
+  }
+
+  /* ---------- Route / itinerary ---------- */
+  .route {
+    padding: 84px 0 90px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--indigo-deep);
+    padding-bottom: 14px;
+    margin-bottom: 48px;
+  }
+  .section-head h2 { font-size: 1.7rem; }
+  .section-head .note { font-size: 0.85rem; color: var(--wood); }
+
+  .stop {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 26px;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .stop:first-child { padding-top: 0; }
+  .stop-time {
+    font-family: "Shippori Mincho", serif;
+    font-size: 1.05rem;
+    color: var(--stamp);
+    padding-top: 4px;
+  }
+  .stop-body { display: grid; grid-template-columns: 100px 1fr; gap: 22px; align-items: start; }
+  .stop-icon { width: 100px; height: 100px; flex-shrink: 0; }
+  .stop h3 { font-size: 1.18rem; margin-bottom: 8px; }
+  .stop p { margin: 0; color: #3a352b; font-size: 0.97rem; }
+
+  .stop.chain { border-bottom: none; padding: 18px 0; }
+  .stop.chain .stop-time { color: var(--wood); font-size: 1.3rem; }
+
+  .tag {
+    display: inline-block;
+    margin-left: 4px;
+    padding: 2px 10px;
+    background: var(--paper-warm);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    font-size: 0.78rem;
+    color: var(--wood);
+    vertical-align: middle;
+  }
+
+  .section-sub-head {
+    padding: 6px 0 10px;
+  }
+  .section-sub-head h3 {
+    font-size: 0.98rem;
+    color: var(--wood);
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 500;
+  }
+
+  /* ---------- Branch (free time split) ---------- */
+  .branch-block {
+    background: var(--paper-warm);
+    margin: 8px 0 30px;
+    padding: 32px 30px 30px;
+    border-left: 3px solid var(--stamp);
+  }
+  .branch-head h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  .branch-head p {
+    margin: 0 0 6px;
+    font-size: 0.95rem;
+    color: #3a352b;
+    max-width: 62ch;
+  }
+  .branch-diagram {
+    width: 100%;
+    max-width: 340px;
+    height: 44px;
+    display: block;
+    margin: 8px auto 4px;
+  }
+  .area-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 8px;
+  }
+  .area-card {
+    background: #fbf7ee;
+    padding: 22px 24px;
+    border: 1px solid var(--line);
+  }
+  .area-card h4 {
+    font-family: "Shippori Mincho", serif;
+    font-size: 1.05rem;
+    color: var(--indigo-deep);
+    margin: 0 0 14px;
+  }
+  .area-card ul { list-style: none; margin: 0; padding: 0; }
+  .area-card li { padding: 10px 0; border-top: 1px solid var(--line); }
+  .area-card li:first-child { border-top: none; padding-top: 0; }
+  .area-card li strong {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.96rem;
+    color: var(--indigo-deep);
+    margin-bottom: 3px;
+  }
+  .area-card li strong .tag { margin-left: 0; }
+  .area-card li span {
+    display: block;
+    font-size: 0.86rem;
+    color: #3a352b;
+    line-height: 1.7;
+  }
+  .area-card-note {
+    margin: 14px 0 0;
+    font-size: 0.78rem;
+    color: var(--wood);
+    font-style: italic;
+  }
+  .branch-note {
+    margin: 18px 0 0;
+    font-size: 0.78rem;
+    color: var(--wood);
+  }
+
+  @media (max-width: 640px) {
+    .stop { grid-template-columns: 60px 1fr; gap: 16px; }
+    .stop-body { grid-template-columns: 68px 1fr; gap: 14px; }
+    .stop-icon { width: 68px; height: 68px; }
+    .area-grid { grid-template-columns: 1fr; }
+    .branch-block { padding: 26px 20px; }
+  }
+
+  /* ---------- Gallery (collage) ---------- */
+  .gallery {
+    background: var(--indigo-deep);
+    padding: 80px 0 90px;
+  }
+  .gallery .section-head { border-bottom-color: var(--water-pale); }
+  .gallery .section-head h2 { color: var(--paper); }
+  .gallery .section-head .note { color: var(--water-pale); }
+
+  .collage {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 130px;
+    gap: 14px;
+  }
+  .tile {
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    background: var(--indigo);
+  }
+  .tile svg { width: 100%; height: 100%; }
+  .tile figcaption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    color: var(--paper);
+    background: linear-gradient(0deg, rgba(0,0,0,0.55), transparent);
+  }
+  .tile { margin: 0; }
+  .t1 { grid-column: span 3; grid-row: span 2; }
+  .t2 { grid-column: span 3; grid-row: span 1; }
+  .t3 { grid-column: span 3; grid-row: span 1; }
+  .t4 { grid-column: span 2; grid-row: span 1; }
+  .t5 { grid-column: span 2; grid-row: span 1; }
+  .t6 { grid-column: span 2; grid-row: span 1; }
+
+  @media (max-width: 700px) {
+    .collage { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+    .t1, .t2, .t3, .t4, .t5, .t6 { grid-column: span 1; grid-row: span 1; }
+    .t1 { grid-column: span 2; grid-row: span 2; }
+  }
+
+  .gallery-note {
+    color: var(--water-pale);
+    font-size: 0.82rem;
+    margin-top: 22px;
+  }
+
+  footer {
+    background: var(--indigo-deep);
+    color: var(--water-pale);
+    padding: 36px 0;
+    font-size: 0.82rem;
+  }
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="topline">
+    <div class="wrap">
+      <span><a href="index.html" class="back-link">← コース一覧</a>　京都市 京北・南丹市 美山</span>
+      <span>催行：株式会社しろみず旅行社</span>
+    </div>
+  </div>
+
+  <nav class="tabnav">
+    <div class="wrap">
+      <button class="tab-btn active" data-target="view-tour">ツアー案内</button>
+      <button class="tab-btn" data-target="view-car">レンタカー利用案内・緊急連絡先</button>
+    </div>
+  </nav>
+
+  <div id="view-tour" class="view active">
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="kicker">日帰り体験ツアー・レンタカー利用</p>
+        <h1>京北・美山、<br>山ふところをめぐる一日</h1>
+        <p class="sub">杉の森を抜け、茅葺きの里へ。決まっているのは行き先だけ、道中の過ごし方は自分たちで選ぶ、山あいの一日。</p>
+      </div>
+      <svg class="hero-illust" viewBox="0 0 480 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="杉の山と茅葺き屋根の里のイラスト">
+        <polygon points="0,140 90,70 170,130 250,50 330,120 480,80 480,380 0,380" fill="var(--indigo)"/>
+        <polygon points="0,190 110,130 210,175 310,120 480,165 480,380 0,380" fill="#2c455b"/>
+        <g fill="var(--moss)" opacity="0.9">
+          <polygon points="60,260 80,190 100,260"/>
+          <polygon points="90,270 112,195 134,270"/>
+          <polygon points="380,255 400,185 420,255"/>
+          <polygon points="350,270 372,200 394,270"/>
+        </g>
+        <path d="M0,300 C90,285 150,310 240,300 C330,290 400,310 480,300 L480,380 L0,380 Z" fill="var(--paper-warm)" opacity="0.95"/>
+        <g>
+          <polygon points="190,255 240,225 290,255" fill="#5c4632"/>
+          <rect x="205" y="255" width="70" height="35" fill="#4a3626"/>
+          <rect x="235" y="268" width="14" height="22" fill="#241c14"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="facts">
+      <div class="wrap facts-row">
+        <div class="fact"><div class="label">所要時間</div><div class="value">約9時間30分（東寺駅前店 発着）</div></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="route">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>めぐる道のり</h2>
+        <span class="note">東寺駅前店 発着・9:30以降は自由散策</span>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time">08:30</div>
+        <div class="stop-body">
+          <svg class="stop-icon" viewBox="0 0 100 100"><rect x="20" y="55" width="60" height="20" rx="4" fill="var(--indigo)"/><polygon points="30,55 40,35 70,35 80,55" fill="var(--indigo-deep)"/><circle cx="35" cy="78" r="8" fill="var(--wood)"/><circle cx="70" cy="78" r="8" fill="var(--wood)"/><line x1="10" y1="90" x2="90" y2="90" stroke="var(--moss)" stroke-width="4"/></svg>
+          <div>
+            <h3>東寺駅前店を出発</h3>
+            <p>レンタカーを受け取り、京都市街を抜けて北へ。周山街道を走るうち、山あいの空気に変わっていく。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time">09:30</div>
+        <div class="stop-body">
+          <svg class="stop-icon" viewBox="0 0 100 100"><rect x="15" y="45" width="70" height="40" fill="var(--wood)"/><polygon points="10,45 50,20 90,45" fill="var(--indigo)"/><rect x="42" y="58" width="16" height="27" fill="var(--indigo-deep)"/><rect x="20" y="52" width="14" height="14" fill="var(--paper)"/><rect x="66" y="52" width="14" height="14" fill="var(--paper)"/></svg>
+          <div>
+            <h3>ウッディー京北に到着</h3>
+            <p>まずは一服。ツアー参加者には来店記念のお土産を用意している。<span class="tag">¥1,000 / 人</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="branch-block">
+        <div class="branch-head">
+          <h3>自由散策タイム</h3>
+          <p>ここから先は自分たちのペースで。京北エリアをじっくり味わうか、美山エリアまで足をのばすか、その日の気分で選べる。11:00〜13:00の間に、河鹿荘で合流する。</p>
+        </div>
+
+        <svg class="branch-diagram" viewBox="0 0 600 70" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="300" y1="0" x2="300" y2="20" stroke="var(--wood)" stroke-width="2"/>
+          <path d="M300,20 C300,40 150,30 150,50" stroke="var(--wood)" stroke-width="2" fill="none"/>
+          <path d="M300,20 C300,40 450,30 450,50" stroke="var(--wood)" stroke-width="2" fill="none"/>
+        </svg>
+
+        <div class="area-grid">
+          <div class="area-card">
+            <h4>京北エリア</h4>
+            <ul>
+              <li><strong>賀茂神社<span class="tag">¥1,000 / 人</span></strong><span>SNSで「異世界」と紹介される神秘的な場所。参拝は無料だが、現地ガイドの案内つきで巡るのがおすすめ。</span></li>
+              <li><strong>山国神社<span class="tag">参拝無料</span></strong><span>若狭街道沿いに立つ古社。杉並木の参道を歩くだけでも気持ちがいい。</span></li>
+              <li><strong>常照皇寺<span class="tag">拝観料 ¥500</span></strong><span>京都でも遅くまで桜が楽しめる古刹。九重桜と、静かな杉木立が印象的。</span></li>
+              <li><strong>慈眼寺<span class="tag">拝観料あり</span></strong><span>静かな山寺。拝観料は現地でご確認ください。</span></li>
+              <li><strong>羽田酒造<span class="tag">試飲無料</span></strong><span>地元の造り酒屋。無料試飲ができ、気に入ればその場で購入も。日曜定休。</span></li>
+              <li><strong>NUDE BEER<span class="tag">要予約</span></strong><span>クラフトビールの醸造所。商品購入ができるが、見学・試飲には事前予約が必要。</span></li>
+              <li><strong>魚ケ渕の吊り橋</strong><span>渓谷にかかる吊り橋。景色を楽しみながら少し足をのばしたい人向け。</span></li>
+            </ul>
+          </div>
+          <div class="area-card">
+            <h4>美山エリア</h4>
+            <ul>
+              <li><strong>おいも喫茶みやま堂</strong><span>さつまいもを使ったスイーツが評判の喫茶店。</span></li>
+              <li><strong>茅葺レストハウス さかや</strong><span>茅葺き屋根の建物でひと休みできる食事処。</span></li>
+              <li><strong>美山おもしろ農民倶楽部</strong><span>農作業や田舎暮らしを体験できる、ちょっと変わった施設。</span></li>
+              <li><strong>大石酒造</strong><span>地元の造り酒屋。酒蔵の雰囲気を楽しみながら見学・購入ができる。</span></li>
+              <li><strong>Cafe Milan</strong><span>山あいで一息つける喫茶店。</span></li>
+              <li><strong>美山珈琲</strong><span>自家焙煎のコーヒーが楽しめる店。</span></li>
+              <li><strong>大野ダム公園</strong><span>ダム湖を望む公園。散策や景色を楽しむのにちょうどいい。</span></li>
+              <li><strong>美山「橋めぐり」</strong><span>集落に点在する趣ある橋を巡って歩く、美山らしい散策コース。</span></li>
+            </ul>
+          </div>
+        </div>
+        <p class="branch-note">※掲載スポットは一例です。最新の営業状況・料金は事前にご確認ください。</p>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time">11:00〜13:00</div>
+        <div class="stop-body">
+          <svg class="stop-icon" viewBox="0 0 100 100"><rect x="20" y="35" width="60" height="40" rx="4" fill="var(--wood)"/><line x1="50" y1="35" x2="50" y2="75" stroke="var(--indigo-deep)" stroke-width="3"/><circle cx="35" cy="55" r="8" fill="#c98a3b"/><rect x="60" y="45" width="15" height="20" fill="var(--moss)"/></svg>
+          <div>
+            <h3>河鹿荘でお弁当を受け取る</h3>
+            <p>この時間内に河鹿荘へ立ち寄り、お弁当を受け取る。川べりや東屋など、好きな場所で昼食に。<span class="tag">¥3,000 / 人</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-sub-head">
+        <h3>13:00以降はこの順にめぐる</h3>
+      </div>
+
+      <div class="stop chain">
+        <div class="stop-time">→</div>
+        <div class="stop-body">
+          <svg class="stop-icon" viewBox="0 0 100 100"><g stroke="var(--stamp)" stroke-width="5" fill="none"><line x1="25" y1="30" x2="25" y2="80"/><line x1="75" y1="30" x2="75" y2="80"/><line x1="15" y1="30" x2="85" y2="30"/><line x1="20" y1="40" x2="80" y2="40"/></g><circle cx="50" cy="60" r="14" fill="var(--wood)"/><circle cx="42" cy="52" r="4" fill="var(--indigo-deep)"/><circle cx="58" cy="52" r="4" fill="var(--indigo-deep)"/></svg>
+          <div>
+            <h3>ぬいぐるみ神社</h3>
+            <p>ちょっと変わった、記念になるお土産が見つかる小さな神社。<span class="tag">¥1,000 / 人</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop chain">
+        <div class="stop-time">→</div>
+        <div class="stop-body">
+          <svg class="stop-icon" viewBox="0 0 100 100"><polygon points="10,72 50,30 90,72" fill="#7a5c3e"/><rect x="30" y="72" width="40" height="18" fill="#4a3626"/><polygon points="15,74 50,38 85,74" fill="#8a6b48" opacity="0.7"/></svg>
+          <div>
+            <h3>かやぶきの里</h3>
+            <p>茅葺き屋根の家々が並ぶ、日本の原風景のような集落。<span class="tag">駐車場 実費</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop chain">
+        <div class="stop-time">→</div>
+        <div class="stop-body">
+          <svg class="stop-icon" viewBox="0 0 100 100"><rect x="15" y="50" width="70" height="30" fill="var(--wood)"/><polygon points="10,50 50,25 90,50" fill="var(--indigo)"/><polygon points="45,60 55,60 50,85" fill="#e8c28a"/><circle cx="50" cy="55" r="10" fill="#f2a65a"/></svg>
+          <div>
+            <h3>道の駅「美山ふれあい広場」</h3>
+            <p>帰り道の一休みに。地元産のジェラートが人気。<span class="tag">実費</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time">〜18:00</div>
+        <div class="stop-body">
+          <svg class="stop-icon" viewBox="0 0 100 100"><rect x="20" y="55" width="60" height="20" rx="4" fill="var(--indigo)"/><polygon points="30,55 40,35 70,35 80,55" fill="var(--indigo-deep)"/><circle cx="35" cy="78" r="8" fill="var(--wood)"/><circle cx="70" cy="78" r="8" fill="var(--wood)"/><line x1="10" y1="90" x2="90" y2="90" stroke="var(--moss)" stroke-width="4"/></svg>
+          <div>
+            <h3>東寺駅前店に到着</h3>
+            <p>返却時刻の18:00までは自由行動。京都市内で少し寄り道してから車を返してもいい。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>ギャラリー</h2>
+        <span class="note">イメージイラスト・実写は近日公開</span>
+      </div>
+      <div class="collage">
+        <figure class="tile t1">
+          <svg viewBox="0 0 300 260"><rect width="300" height="260" fill="var(--indigo)"/><polygon points="0,150 300,120 300,260 0,260" fill="#2c455b"/><rect x="90" y="110" width="60" height="60" fill="var(--wood)"/><polygon points="80,110 120,80 160,110" fill="var(--indigo-deep)"/></svg>
+          <figcaption>ウッディー京北</figcaption>
+        </figure>
+        <figure class="tile t2">
+          <svg viewBox="0 0 300 130"><rect width="300" height="130" fill="var(--indigo-deep)"/><g fill="var(--moss)"><polygon points="120,110 145,50 170,110"/><polygon points="150,120 178,55 206,120"/></g></svg>
+          <figcaption>常照皇寺の杉木立</figcaption>
+        </figure>
+        <figure class="tile t3">
+          <svg viewBox="0 0 300 130"><rect width="300" height="130" fill="#2c455b"/><g stroke="var(--stamp)" stroke-width="6" fill="none"><line x1="110" y1="30" x2="110" y2="100"/><line x1="190" y1="30" x2="190" y2="100"/><line x1="95" y1="30" x2="205" y2="30"/></g><circle cx="150" cy="75" r="16" fill="var(--wood)"/></svg>
+          <figcaption>ぬいぐるみ神社</figcaption>
+        </figure>
+        <figure class="tile t4">
+          <svg viewBox="0 0 200 130"><rect width="200" height="130" fill="var(--paper-warm)"/><polygon points="20,110 100,40 180,110" fill="#7a5c3e"/><polygon points="30,112 100,50 170,112" fill="#8a6b48" opacity="0.7"/></svg>
+          <figcaption>かやぶきの里</figcaption>
+        </figure>
+        <figure class="tile t5">
+          <svg viewBox="0 0 200 130"><rect width="200" height="130" fill="var(--indigo)"/><polygon points="80,110 100,60 120,110" fill="#e8c28a"/><circle cx="100" cy="65" r="14" fill="#f2a65a"/></svg>
+          <figcaption>美山ふれあい広場のジェラート</figcaption>
+        </figure>
+        <figure class="tile t6">
+          <svg viewBox="0 0 200 130"><rect width="200" height="130" fill="#1e2f3f"/><path d="M0,90 Q100,60 200,90 L200,130 L0,130 Z" fill="var(--water)" opacity="0.8"/></svg>
+          <figcaption>由良川のせせらぎ</figcaption>
+        </figure>
+      </div>
+      <p class="gallery-note">※本ページの画像は雰囲気を伝えるためのイラストです。実際のツアーでは現地写真に差し替えてご案内します。</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>株式会社しろみず旅行社（旅行業登録番号：仮登録）</span>
+      <span>本ツアーは提携販売店を通じてお申し込みいただけます</span>
+    </div>
+  </footer>
+
+  </div>
+
+  <div id="view-car" class="view">
+
+  <header class="car-hero">
+    <div class="wrap">
+      <p class="eyebrow">レンタカー利用のお客様へ</p>
+      <h1>運転の流れと、もしもの時の連絡先</h1>
+      <p>本ツアーは各区間を参加者ご自身の運転で移動します。出発前に目を通しておくと、当日の流れがつかみやすくなります。</p>
+    </div>
+  </header>
+
+  <section class="car-section">
+    <div class="wrap">
+      <h2>利用の流れ</h2>
+      <div class="car-steps">
+        <div class="car-step">
+          <div>
+            <h3>東寺駅前店で受け取り</h3>
+            <p>運転免許証の提示と契約書へのご記入をお願いします。出発前に車体の傷を係員と一緒に確認します。8:30出発に間に合うよう、15分前を目安にお越しください。</p>
+          </div>
+        </div>
+        <div class="car-step">
+          <div>
+            <h3>カーナビにルートを設定</h3>
+            <p>まずはウッディー京北を目的地に。周山街道（国道162号）を北上します。そこから先は自由散策のため、京北エリア・美山エリアのお好きなスポットを順にご設定ください。電波が弱い区間があるため、紙の地図もお渡しします。</p>
+          </div>
+        </div>
+        <div class="car-step">
+          <div>
+            <h3>駐車は指定の場所へ</h3>
+            <p>かやぶきの里など一部の立ち寄り先には駐車場代（実費）が必要です。現地の看板の案内に従って指定の駐車場をご利用ください。路上駐車はできません。</p>
+          </div>
+        </div>
+        <div class="car-step">
+          <div>
+            <h3>給油は満タン返し</h3>
+            <p>返却前に、東寺駅前店から半径3km以内のガソリンスタンドで満タンにしてください。レシートの提示は不要ですが、当日中にお願いします。</p>
+          </div>
+        </div>
+        <div class="car-step">
+          <div>
+            <h3>東寺駅前店へ返却</h3>
+            <p>返却期限は18:00です。到着が遅れる場合は、下記の緊急連絡先まで一報をお願いします。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="car-section">
+    <div class="wrap">
+      <h2>運転時の注意事項</h2>
+      <div class="caution-grid">
+        <div class="caution-card">
+          <h3>山間部の道幅</h3>
+          <p>京北・美山エリアは対向車とのすれ違いが難しい区間があります。速度を落とし、待避所ではこまめに譲り合ってください。</p>
+        </div>
+        <div class="caution-card">
+          <h3>野生動物の飛び出し</h3>
+          <p>鹿や猿が道路に出てくることがあります。特に日没前後は速度を控えめにしてください。</p>
+        </div>
+        <div class="caution-card">
+          <h3>電波が届きにくい区間</h3>
+          <p>山あいでは携帯電波が不安定になることがあります。カーナビの目的地は出発前にまとめて設定しておくと安心です。</p>
+        </div>
+        <div class="caution-card">
+          <h3>合流時間について</h3>
+          <p>自由散策エリアから河鹿荘までは距離があります。13:00以降の行程に遅れないよう、11:00〜13:00の間には河鹿荘に到着できるよう余裕を持ってお楽しみください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="car-section emergency-block">
+    <div class="wrap">
+      <h2>緊急時の連絡先</h2>
+      <table class="emergency-table">
+        <tr>
+          <th>事故・故障（レンタカー会社）</th>
+          <td>0120-000-000<span class="sub">24時間対応・ロードサービス</span></td>
+        </tr>
+        <tr>
+          <th>ツアー運営（しろみず旅行社）</th>
+          <td>0575-00-0000<span class="sub">ツアー当日 8:00〜18:30</span></td>
+        </tr>
+        <tr>
+          <th>警察・消防・救急</th>
+          <td>110 / 119<span class="sub">事故発生時はまず通報を</span></td>
+        </tr>
+        <tr>
+          <th>JAFロードサービス</th>
+          <td>#8139<span class="sub">レンタカー会社に連絡がつかない場合</span></td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.tab-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+        document.querySelectorAll('.view').forEach(function (v) { v.classList.remove('active'); });
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.target).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
