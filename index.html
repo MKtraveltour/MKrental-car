@@ -5,20 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>日帰りツアー コース一覧 | しろみず旅行社</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #201d17;
-    --indigo: #22384c;
-    --indigo-deep: #16232f;
-    --water: #4c8c96;
-    --water-pale: #a9c9c9;
-    --paper: #efe6d8;
-    --paper-warm: #e6dac6;
-    --moss: #5c6e4f;
-    --wood: #8b6a4f;
-    --stamp: #a8452e;
-    --line: rgba(32, 29, 23, 0.16);
+    --ink: #2b2620;
+    --cream: #fff6e8;
+    --cream-deep: #ffedd0;
+    --coral: #ff6b4a;
+    --coral-deep: #e8532f;
+    --teal: #21b3a4;
+    --teal-deep: #17897d;
+    --yellow: #ffc93c;
+    --pink: #ff7fb0;
+    --purple: #8b6bff;
+    --line: rgba(43, 38, 32, 0.14);
     --max-w: 1040px;
   }
 
@@ -26,18 +26,18 @@
 
   body {
     margin: 0;
-    background: var(--paper);
+    background: var(--cream);
     color: var(--ink);
-    font-family: "Noto Sans JP", sans-serif;
+    font-family: "Zen Maru Gothic", "Noto Sans JP", sans-serif;
     line-height: 1.9;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3 {
-    font-family: "Shippori Mincho", serif;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    color: var(--indigo-deep);
+    font-family: "M PLUS Rounded 1c", "Zen Maru Gothic", sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: var(--coral-deep);
     margin: 0;
   }
 
@@ -51,16 +51,17 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--stamp);
+    outline: 3px solid var(--purple);
     outline-offset: 3px;
   }
 
   .topline {
-    background: var(--indigo-deep);
-    color: var(--water-pale);
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    padding: 9px 0;
+    background: var(--purple);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 10px 0;
   }
   .topline .wrap {
     display: flex;
@@ -70,25 +71,33 @@
   }
 
   .page-head {
-    background: linear-gradient(180deg, var(--indigo) 0%, var(--indigo-deep) 100%);
-    color: var(--paper);
+    background: linear-gradient(160deg, var(--teal) 0%, var(--teal-deep) 100%);
+    color: #fff;
     padding: 64px 0 56px;
   }
   .page-head .kicker {
-    font-size: 0.9rem;
-    color: var(--water-pale);
-    margin: 0 0 16px;
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--teal-deep);
+    background: var(--yellow);
+    padding: 6px 16px;
+    border-radius: 40px;
+    margin: 0 0 20px;
+    transform: rotate(-2deg);
   }
   .page-head h1 {
     font-size: clamp(1.9rem, 4vw, 2.6rem);
-    color: #fbf7ee;
+    color: #fff;
     max-width: 20ch;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.12);
   }
   .page-head p {
     margin-top: 18px;
-    color: var(--water-pale);
+    color: #eafffb;
     max-width: 50ch;
     font-size: 0.98rem;
+    font-weight: 500;
   }
 
   .course-list {
@@ -100,25 +109,35 @@
     grid-template-columns: 220px 1fr auto;
     gap: 32px;
     align-items: center;
-    padding: 30px 0;
-    border-bottom: 1px solid var(--line);
+    padding: 24px;
+    margin-bottom: 22px;
+    background: #fff;
+    border: 3px solid var(--ink);
+    border-radius: 24px;
+    box-shadow: 6px 6px 0 rgba(43,38,32,0.1);
     text-decoration: none;
     color: inherit;
   }
-  .course-card:first-child { padding-top: 0; }
 
   .course-thumb {
     width: 220px;
     height: 140px;
-    background: var(--indigo-deep);
+    background: var(--teal-deep);
+    border-radius: 16px;
     overflow: hidden;
+    border: 3px solid var(--ink);
   }
   .course-thumb svg { width: 100%; height: 100%; }
 
   .course-body .area {
-    font-size: 0.8rem;
-    color: var(--wood);
-    margin-bottom: 8px;
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--teal-deep);
+    background: #d7f7f1;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
   }
   .course-body h2 {
     font-size: 1.35rem;
@@ -127,43 +146,45 @@
   .course-body p {
     margin: 0;
     font-size: 0.92rem;
-    color: #3a352b;
+    color: #4a4238;
     max-width: 52ch;
+    font-weight: 500;
   }
 
   .course-status {
     justify-self: end;
     white-space: nowrap;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 20px;
   }
   .status-live {
-    color: var(--moss);
-  }
-  .status-live::before {
-    content: "";
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--moss);
-    margin-right: 7px;
+    color: #fff;
+    background: var(--coral);
   }
   .status-soon {
-    color: var(--wood);
+    color: var(--ink);
+    background: var(--yellow);
   }
 
   .course-card.is-soon {
     cursor: default;
+    box-shadow: none;
+    border-style: dashed;
+    background: var(--cream-deep);
   }
-  .course-card.is-soon .course-thumb { opacity: 0.5; }
-  .course-card.is-soon .course-body h2 { color: var(--wood); }
-  .course-card:not(.is-soon):hover .course-body h2 { color: var(--stamp); }
+  .course-card.is-soon .course-thumb { opacity: 0.6; }
+  .course-card.is-soon .course-body h2 { color: #8a7f6f; }
+  .course-card:not(.is-soon):hover { transform: translate(-2px, -2px); box-shadow: 9px 9px 0 rgba(43,38,32,0.12); }
+  .course-card:not(.is-soon):hover .course-body h2 { color: var(--coral-deep); }
 
   footer {
-    background: var(--indigo-deep);
-    color: var(--water-pale);
+    background: var(--ink);
+    color: #cfc7ba;
     padding: 30px 0;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
+    font-weight: 500;
   }
 
   @media (max-width: 700px) {
@@ -199,13 +220,13 @@
       <a class="course-card" href="keihoku-miyama.html">
         <div class="course-thumb">
           <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
-            <rect width="220" height="140" fill="#22384c"/>
-            <polygon points="0,70 40,35 80,65 120,25 160,60 220,40 220,140 0,140" fill="#2c455b"/>
-            <g fill="#5c6e4f">
+            <rect width="220" height="140" fill="#17897d"/>
+            <polygon points="0,70 40,35 80,65 120,25 160,60 220,40 220,140 0,140" fill="#21b3a4"/>
+            <g fill="#3fae6e">
               <polygon points="30,120 45,85 60,120"/>
               <polygon points="150,120 168,80 186,120"/>
             </g>
-            <polygon points="90,120 110,100 130,120" fill="#5c4632"/>
+            <polygon points="90,120 110,100 130,120" fill="#ffc93c"/>
           </svg>
         </div>
         <div class="course-body">
@@ -219,10 +240,10 @@
       <div class="course-card is-soon">
         <div class="course-thumb">
           <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
-            <rect width="220" height="140" fill="#22384c"/>
-            <polygon points="0,90 220,70 220,140 0,140" fill="#4c8c96"/>
-            <polygon points="0,100 220,85 220,140 0,140" fill="#5fa3ab"/>
-            <polygon points="150,90 170,50 190,90" fill="#2c455b"/>
+            <rect width="220" height="140" fill="#8b6bff"/>
+            <polygon points="0,90 220,70 220,140 0,140" fill="#ff7fb0"/>
+            <polygon points="0,100 220,85 220,140 0,140" fill="#ffa8ca"/>
+            <polygon points="150,90 170,50 190,90" fill="#6c50e0"/>
           </svg>
         </div>
         <div class="course-body">
