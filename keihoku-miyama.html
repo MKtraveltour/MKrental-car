@@ -264,8 +264,6 @@
   }
   .branch-head h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--coral-deep); }
   .branch-head p { margin: 0 0 6px; font-size: 0.95rem; color: #4a4238; max-width: 62ch; }
-  .branch-diagram { width: 100%; max-width: 340px; height: 44px; display: block; margin: 8px auto 4px; }
-  .branch-diagram path, .branch-diagram line { stroke: var(--coral); }
 
   .area-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 8px; }
   .area-card {
@@ -299,6 +297,30 @@
   .area-card-note { margin: 14px 0 0; font-size: 0.78rem; color: var(--coral-deep); font-weight: 700; }
   .branch-note { margin: 18px 0 0; font-size: 0.8rem; color: #8a7f6f; font-weight: 500; }
 
+  /* 分岐・合流の図 */
+  .fork { text-align: center; margin: 14px 0 0; }
+  .fork-merge { margin: 8px 0 -6px; }
+  .fork-chip {
+    display: inline-block;
+    padding: 3px 14px;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.7;
+  }
+  .fork-svg { display: block; width: 100%; height: 46px; overflow: visible; }
+  .fork-line {
+    fill: none;
+    stroke: var(--coral);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .area-tabs { display: none; }
+
   @media (max-width: 640px) {
     .stop { grid-template-columns: 60px 1fr; gap: 16px; padding: 20px 16px; }
     .stop-body { grid-template-columns: 68px 1fr; gap: 14px; }
@@ -307,30 +329,39 @@
     .branch-block { padding: 26px 20px; }
   }
 
-  /* ---------- Gallery ---------- */
-  .gallery { background: var(--purple); padding: 80px 0 90px; }
-  .gallery .section-head { border-bottom-color: #fff; }
-  .gallery .section-head h2 { color: #fff; }
-  .gallery .section-head .note { background: #fff; color: var(--purple); }
-
-  .collage { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 220px; gap: 16px; }
-  .tile { border-radius: 18px; overflow: hidden; position: relative; background: var(--teal-deep); border: 3px solid var(--ink); margin: 0; }
-  .tile .photo-btn { position: absolute; inset: 0; border: none; border-radius: 0; }
-  .tile figcaption {
-    position: absolute; left: 0; right: 0; bottom: 0;
-    padding: 28px 14px 10px;
-    font-size: 0.84rem;
-    font-weight: 700;
-    color: #fff;
-    background: linear-gradient(0deg, rgba(0,0,0,0.65), transparent);
-    pointer-events: none;
-  }
-  .t1 { grid-column: span 2; grid-row: span 2; }
-
-  @media (max-width: 700px) {
-    .collage { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 170px; }
-    .t6 { grid-column: span 2; }
-    .tile figcaption { font-size: 0.72rem; padding: 22px 10px 8px; line-height: 1.5; }
+  /* スマホ: エリアをボタンで切り替え(2つのルートのどちらかを選ぶ形に見せる) */
+  @media (max-width: 640px) {
+    .area-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 2px; }
+    .area-tab {
+      appearance: none;
+      font: inherit;
+      padding: 10px 6px;
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      background: #fff;
+      color: var(--ink);
+      text-align: center;
+      line-height: 1.35;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 rgba(43, 38, 32, 0.18);
+    }
+    .area-tab b { display: block; font-family: "M PLUS Rounded 1c", sans-serif; font-size: 1.02rem; }
+    .area-tab small { display: block; font-size: 0.74rem; font-weight: 700; color: #8a7f6f; }
+    .area-tab[aria-selected="true"] {
+      background: var(--coral);
+      color: #fff;
+      box-shadow: none;
+      transform: translate(3px, 3px);
+    }
+    .area-tab[aria-selected="true"] small { color: #fff1ea; }
+    .area-card:not(.is-active) { display: none; }
+    .area-card h4 { display: none; }
+    .area-grid { margin-top: 14px; }
+    /* 選ばれていない側のルートは点線にして、選んだ道がわかるようにする */
+    .branch-block[data-area="kei"] .fork:not(.fork-merge) .fork-r,
+    .branch-block[data-area="miyama"] .fork:not(.fork-merge) .fork-l { stroke: #cdbfa8; stroke-dasharray: 1 9; }
+    .branch-block[data-area="kei"] .fork-merge .fork-r,
+    .branch-block[data-area="miyama"] .fork-merge .fork-l { stroke: #cdbfa8; stroke-dasharray: 1 9; }
   }
 
   /* ---------- Photos (thumbnails / lightbox) ---------- */
@@ -394,7 +425,9 @@
     transform: scale(0.94);
     transition: opacity 0.25s ease, transform 0.25s ease;
   }
+  .pslide { scroll-snap-stop: always; }
   .pslide.is-active { opacity: 1; transform: none; }
+  .pslider-track.no-anim .pslide { transition: none; }
   .pslide img {
     display: block;
     width: 100%;
@@ -509,7 +542,6 @@
     cursor: pointer;
   }
 
-  .gallery-note { color: #ece5ff; font-size: 0.84rem; margin-top: 22px; font-weight: 500; }
 
   footer {
     background: var(--ink);
@@ -657,7 +689,7 @@
             <p>レンタカーを受け取り、京都市街を抜けて北へ。周山街道を走るうち、山あいの空気に変わっていく。</p>
           </div>
         </div>
-        <div class="stop-photo"><div class="pslider" role="group" aria-roledescription="carousel" aria-label="東寺駅前店の写真"><div class="pslider-stage"><div class="pslider-track" tabindex="0"><figure class="pslide" role="group" aria-roledescription="slide" aria-label="1 / 2"><img data-img="mk-rental-1" alt="ピンクののぼりが並ぶMKレンタカー東寺駅前店の駐車場" decoding="async" style="object-position:50% 30%"><figcaption>駐車場(ピンクののぼりが目印)</figcaption></figure><figure class="pslide" role="group" aria-roledescription="slide" aria-label="2 / 2"><img data-img="mk-rental-2" alt="MKレンタカー東寺駅前店の入口と白い車" decoding="async" style="object-position:50% 40%"><figcaption>入口(白い建物)</figcaption></figure></div><button type="button" class="pslider-btn prev" aria-label="前の写真"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="pslider-btn next" aria-label="次の写真"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="pslider-dots"></div></div></div>
+        <div class="stop-photo"><div class="pslider" data-noloop role="group" aria-roledescription="carousel" aria-label="東寺駅前店の写真"><div class="pslider-stage"><div class="pslider-track" tabindex="0"><figure class="pslide" role="group" aria-roledescription="slide" aria-label="1 / 2"><img data-img="mk-rental-1" alt="ピンクののぼりが並ぶMKレンタカー東寺駅前店の駐車場" decoding="async" style="object-position:50% 30%"><figcaption>駐車場(ピンクののぼりが目印)</figcaption></figure><figure class="pslide" role="group" aria-roledescription="slide" aria-label="2 / 2"><img data-img="mk-rental-2" alt="MKレンタカー東寺駅前店の入口と白い車" decoding="async" style="object-position:50% 40%"><figcaption>入口(白い建物)</figcaption></figure></div><button type="button" class="pslider-btn prev" aria-label="前の写真"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="pslider-btn next" aria-label="次の写真"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="pslider-dots"></div></div></div>
       </div>
 
       <div class="stop">
@@ -677,14 +709,21 @@
           <p>ここから先は自分たちのペースで。京北エリアをじっくり味わうか、美山エリアまで足をのばすか、その日の気分で選べる。11:00〜13:00の間に、河鹿荘で合流する。</p>
         </div>
 
-        <svg class="branch-diagram" viewBox="0 0 600 70" preserveAspectRatio="none" aria-hidden="true">
-          <line x1="300" y1="0" x2="300" y2="20" stroke="var(--wood)" stroke-width="2"/>
-          <path d="M300,20 C300,40 150,30 150,50" stroke="var(--wood)" stroke-width="2" fill="none"/>
-          <path d="M300,20 C300,40 450,30 450,50" stroke="var(--wood)" stroke-width="2" fill="none"/>
-        </svg>
+        <div class="fork" aria-hidden="true">
+          <span class="fork-chip">どちらか1つを選べます</span>
+          <svg class="fork-svg" viewBox="0 0 100 40" preserveAspectRatio="none">
+            <path class="fork-line fork-l" d="M50 0 V8 C50 24 25 22 25 40"/>
+            <path class="fork-line fork-r" d="M50 0 V8 C50 24 75 22 75 40"/>
+          </svg>
+        </div>
+
+        <div class="area-tabs" role="tablist" aria-label="散策するエリアを選ぶ">
+          <button type="button" role="tab" class="area-tab" id="tab-kei" aria-controls="area-kei" aria-selected="true"><b>京北エリア</b><small></small></button>
+          <button type="button" role="tab" class="area-tab" id="tab-miyama" aria-controls="area-miyama" aria-selected="false" tabindex="-1"><b>美山エリア</b><small></small></button>
+        </div>
 
         <div class="area-grid">
-          <div class="area-card">
+          <div class="area-card is-active" id="area-kei" role="tabpanel" aria-labelledby="tab-kei">
             <h4>京北エリア</h4>
             <ul>
               <li><strong>賀茂神社<span class="tag">¥1,000 / 人</span></strong><span>SNSで「異世界」と紹介される神秘的な場所。参拝は無料だが、現地ガイドの案内つきで巡るのがおすすめ。</span></li>
@@ -696,7 +735,7 @@
               <li><strong>魚ケ渕の吊り橋</strong><span>渓谷にかかる吊り橋。景色を楽しみながら少し足をのばしたい人向け。</span></li>
             </ul>
           </div>
-          <div class="area-card">
+          <div class="area-card" id="area-miyama" role="tabpanel" aria-labelledby="tab-miyama">
             <h4>美山エリア</h4>
             <ul>
               <li><strong>おいも喫茶みやま堂</strong><span>さつまいもスイーツが評判の喫茶店。店頭には新芋や大学芋が並び、テイクアウトもできる。窓際の席からは山あいの景色を眺められる。</span>
@@ -714,6 +753,14 @@
           </div>
         </div>
         <p class="branch-note">※掲載スポットは一例です。最新の営業状況・料金は事前にご確認ください。</p>
+
+        <div class="fork fork-merge" aria-hidden="true">
+          <svg class="fork-svg" viewBox="0 0 100 40" preserveAspectRatio="none">
+            <path class="fork-line fork-l" d="M25 0 C25 18 50 16 50 32 V40"/>
+            <path class="fork-line fork-r" d="M75 0 C75 18 50 16 50 32 V40"/>
+          </svg>
+          <span class="fork-chip">ここで合流(河鹿荘へ)</span>
+        </div>
       </div>
 
       <div class="stop">
@@ -773,44 +820,8 @@
             <p>返却時刻の18:00までは自由行動。京都市内で少し寄り道してから車を返してもいい。</p>
           </div>
         </div>
-        <div class="stop-photo"><div class="pslider" role="group" aria-roledescription="carousel" aria-label="東寺駅前店の写真"><div class="pslider-stage"><div class="pslider-track" tabindex="0"><figure class="pslide" role="group" aria-roledescription="slide" aria-label="1 / 2"><img data-img="mk-rental-2" alt="MKレンタカー東寺駅前店の入口と白い車" decoding="async" style="object-position:50% 40%"><figcaption>入口(白い建物)</figcaption></figure><figure class="pslide" role="group" aria-roledescription="slide" aria-label="2 / 2"><img data-img="mk-rental-1" alt="ピンクののぼりが並ぶMKレンタカー東寺駅前店の駐車場" decoding="async" style="object-position:50% 30%"><figcaption>駐車場(ピンクののぼりが目印)</figcaption></figure></div><button type="button" class="pslider-btn prev" aria-label="前の写真"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="pslider-btn next" aria-label="次の写真"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="pslider-dots"></div></div></div>
+        <div class="stop-photo"><div class="pslider" data-noloop role="group" aria-roledescription="carousel" aria-label="東寺駅前店の写真"><div class="pslider-stage"><div class="pslider-track" tabindex="0"><figure class="pslide" role="group" aria-roledescription="slide" aria-label="1 / 2"><img data-img="mk-rental-2" alt="MKレンタカー東寺駅前店の入口と白い車" decoding="async" style="object-position:50% 40%"><figcaption>入口(白い建物)</figcaption></figure><figure class="pslide" role="group" aria-roledescription="slide" aria-label="2 / 2"><img data-img="mk-rental-1" alt="ピンクののぼりが並ぶMKレンタカー東寺駅前店の駐車場" decoding="async" style="object-position:50% 30%"><figcaption>駐車場(ピンクののぼりが目印)</figcaption></figure></div><button type="button" class="pslider-btn prev" aria-label="前の写真"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="pslider-btn next" aria-label="次の写真"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="pslider-dots"></div></div></div>
       </div>
-    </div>
-  </section>
-
-  <section class="gallery">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>ギャラリー</h2>
-        <span class="note">現地で撮影した写真</span>
-      </div>
-      <div class="collage">
-        <figure class="tile t1">
-          <button type="button" class="photo-btn" data-cap="おいも喫茶みやま堂｜窓の向こうは美山の山並み"><img data-img="miyamado-1" alt="窓の外に山並みと瓦屋根が見える、おいも喫茶みやま堂の店内" decoding="async" style="object-position:50% 60%"></button>
-          <figcaption>おいも喫茶みやま堂｜窓の向こうは美山の山並み</figcaption>
-        </figure>
-        <figure class="tile t2">
-          <button type="button" class="photo-btn" data-cap="美山おもしろ農民倶楽部｜外観"><img data-img="nomin-exterior" alt="薪が積まれた丸太小屋風の建物" decoding="async" style="object-position:50% 55%"></button>
-          <figcaption>美山おもしろ農民倶楽部｜外観</figcaption>
-        </figure>
-        <figure class="tile t3">
-          <button type="button" class="photo-btn" data-cap="美山珈琲｜アイスコーヒーでひと息"><img data-img="miyama-coffee-drink" alt="木のコースターに置かれたアイスコーヒー" decoding="async" style="object-position:50% 85%"></button>
-          <figcaption>美山珈琲｜アイスコーヒーでひと息</figcaption>
-        </figure>
-        <figure class="tile t4">
-          <button type="button" class="photo-btn" data-cap="美山おもしろ農民倶楽部｜店内"><img data-img="nomin-interior" alt="薪ストーブと木のテーブルが並ぶ店内" decoding="async" style="object-position:50% 50%"></button>
-          <figcaption>美山おもしろ農民倶楽部｜店内</figcaption>
-        </figure>
-        <figure class="tile t5">
-          <button type="button" class="photo-btn" data-cap="おいも喫茶みやま堂｜店頭にはおいもがずらり"><img data-img="miyamado-2" alt="焼きいもや大学芋が並ぶ、みやま堂のカウンター" decoding="async" style="object-position:50% 50%"></button>
-          <figcaption>おいも喫茶みやま堂｜店頭にはおいもがずらり</figcaption>
-        </figure>
-        <figure class="tile t6">
-          <button type="button" class="photo-btn" data-cap="MKレンタカー 東寺駅前店｜ここから出発"><img data-img="mk-rental-2" alt="MKレンタカー東寺駅前店の入口と白い車" decoding="async" style="object-position:50% 60%"></button>
-          <figcaption>MKレンタカー 東寺駅前店｜ここから出発</figcaption>
-        </figure>
-      </div>
-      <p class="gallery-note">※写真は現地で撮影したものです。タップすると大きく表示されます。</p>
     </div>
   </section>
 
@@ -989,25 +1000,46 @@
   </script>
 
   <script>
-    /* 写真スライダー(行程内・各スポット内)。スマホはスワイプ、PCは矢印・ドット・ドラッグ・キーボードで操作 */
+    /* 写真スライダー(行程内・各スポット内)。最後の写真の次は最初の写真に戻る(ループ)。
+       スマホはスワイプ、PCは矢印・ドット・ドラッグ・キーボードで操作 */
     (function () {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-      var updaters = [];
+      var refitters = [];
+
+      function cloneSlide(el) {
+        var c = el.cloneNode(true);
+        c.classList.add('is-clone');
+        c.setAttribute('aria-hidden', 'true');
+        ['role', 'aria-roledescription', 'aria-label'].forEach(function (a) { c.removeAttribute(a); });
+        var im = c.querySelector('img'); if (im) im.alt = '';
+        return c;
+      }
 
       Array.prototype.forEach.call(document.querySelectorAll('.pslider'), function (root) {
         var track = root.querySelector('.pslider-track');
-        var slides = Array.prototype.slice.call(track.children);
         var prev = root.querySelector('.pslider-btn.prev');
         var next = root.querySelector('.pslider-btn.next');
         var dotsBox = root.querySelector('.pslider-dots');
+        var originals = Array.prototype.slice.call(track.children);
+        var n = originals.length;
+        var loop = !root.hasAttribute('data-noloop');   /* 出発・到着の写真はループなし */
+        var k = loop ? Math.min(2, n) : 0;               /* 前後に付け足す複製の枚数 */
         var dots = [];
-        var cur = 0;
+        var ext = k;                       /* いま中央にあるスライドの位置(複製を含む) */
+        var pressed = false, dragging = false, timer = null;
 
-        slides.forEach(function (s, i) {
+        /* 前後に複製を付けて「端がない」状態にする */
+        var head = document.createDocumentFragment();
+        if (k) originals.slice(n - k).forEach(function (el) { head.appendChild(cloneSlide(el)); });
+        track.insertBefore(head, track.firstChild);
+        if (k) originals.slice(0, k).forEach(function (el) { track.appendChild(cloneSlide(el)); });
+        var slides = Array.prototype.slice.call(track.children);
+
+        originals.forEach(function (el, i) {
           var d = document.createElement('button');
           d.type = 'button';
           d.setAttribute('aria-label', (i + 1) + '枚目の写真を見る');
-          d.addEventListener('click', function () { go(i); });
+          d.addEventListener('click', function () { go(k + i); });
           dotsBox.appendChild(d);
           dots.push(d);
         });
@@ -1029,29 +1061,58 @@
           return best;
         }
         function update() {
-          cur = nearest();
-          slides.forEach(function (s, i) { s.classList.toggle('is-active', i === cur); });
+          if (!track.clientWidth) return;   /* 非表示のあいだは何もしない */
+          ext = nearest();
+          var li = ((ext - k) % n + n) % n;
+          prev.disabled = !loop && ext === 0;
+          next.disabled = !loop && ext === slides.length - 1;
+          slides.forEach(function (s, i) { s.classList.toggle('is-active', i === ext); });
           dots.forEach(function (d, i) {
-            d.classList.toggle('is-active', i === cur);
-            if (i === cur) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+            d.classList.toggle('is-active', i === li);
+            if (i === li) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
           });
-          prev.disabled = cur === 0;
-          next.disabled = cur === slides.length - 1;
         }
+
+        /* 瞬間移動(見た目は同じ写真なので、ループしていることに気づかない) */
+        function jumpTo(i) {
+          track.classList.add('no-anim');
+          track.style.scrollSnapType = 'none';
+          track.scrollLeft = targetLeft(i);
+          update();
+          requestAnimationFrame(function () {
+            track.style.scrollSnapType = '';
+            requestAnimationFrame(function () { track.classList.remove('no-anim'); });
+          });
+        }
+        /* 動きが止まったとき、複製の上にいたら本物の同じ写真へ移す */
+        function settle() {
+          if (!loop) return;
+          if (pressed || dragging) { schedule(); return; }
+          var i = nearest();
+          if (Math.abs(track.scrollLeft - targetLeft(i)) > 3) return;   /* まだ動いている最中 */
+          if (i < k) jumpTo(i + n);
+          else if (i >= k + n) jumpTo(i - n);
+        }
+        function schedule() { clearTimeout(timer); timer = setTimeout(settle, 150); }
 
         var ticking = false;
         track.addEventListener('scroll', function () {
+          schedule();
           if (ticking) return;
           ticking = true;
           requestAnimationFrame(function () { ticking = false; update(); });
         }, { passive: true });
+        track.addEventListener('scrollend', settle);
+        track.addEventListener('touchstart', function () { pressed = true; }, { passive: true });
+        track.addEventListener('touchend', function () { pressed = false; schedule(); }, { passive: true });
+        track.addEventListener('touchcancel', function () { pressed = false; schedule(); }, { passive: true });
 
-        prev.addEventListener('click', function () { go(cur - 1); });
-        next.addEventListener('click', function () { go(cur + 1); });
+        prev.addEventListener('click', function () { go(ext - 1); });
+        next.addEventListener('click', function () { go(ext + 1); });
 
         track.addEventListener('keydown', function (e) {
-          if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
-          else if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+          if (e.key === 'ArrowLeft') { e.preventDefault(); go(ext - 1); }
+          else if (e.key === 'ArrowRight') { e.preventDefault(); go(ext + 1); }
         });
 
         /* マウスのドラッグ */
@@ -1059,6 +1120,7 @@
         track.addEventListener('pointerdown', function (e) {
           if (e.pointerType !== 'mouse' || e.button !== 0) return;
           drag = { x: e.clientX, left: track.scrollLeft, start: nearest(), dx: 0 };
+          dragging = true;
           track.classList.add('dragging');
           track.setPointerCapture(e.pointerId);
         });
@@ -1071,6 +1133,7 @@
           if (!drag) return;
           var d = drag;
           drag = null;
+          dragging = false;
           track.classList.remove('dragging');
           var target = nearest();
           if (target === d.start && Math.abs(d.dx) > 30) target = d.start + (d.dx < 0 ? 1 : -1);
@@ -1079,15 +1142,57 @@
         track.addEventListener('pointerup', endDrag);
         track.addEventListener('pointercancel', endDrag);
 
-        function refit() { track.scrollLeft = targetLeft(cur); update(); }
+        /* 画面サイズ変更・タブ切替のあとに位置を合わせ直す */
+        function refit() {
+          track.classList.add('no-anim');
+          track.scrollLeft = targetLeft(ext);
+          update();
+          requestAnimationFrame(function () { requestAnimationFrame(function () { track.classList.remove('no-anim'); }); });
+        }
         window.addEventListener('resize', refit);
-        updaters.push(update);
+        refitters.push(refit);
+
+        /* 最初は1枚目(本物)から */
+        track.scrollLeft = targetLeft(k);
         update();
       });
 
       document.addEventListener('tabchange', function () {
-        requestAnimationFrame(function () { updaters.forEach(function (u) { u(); }); });
+        requestAnimationFrame(function () { refitters.forEach(function (f) { f(); }); });
       });
+    })();
+  </script>
+
+  <script>
+    /* 自由散策タイム: スマホではエリアをボタンで切り替え */
+    (function () {
+      var block = document.querySelector('.branch-block');
+      if (!block) return;
+      var tabs = Array.prototype.slice.call(block.querySelectorAll('.area-tab'));
+      var cards = Array.prototype.slice.call(block.querySelectorAll('.area-card'));
+      var keys = ['kei', 'miyama'];
+
+      tabs.forEach(function (tab, i) {
+        tab.querySelector('small').textContent = cards[i].querySelectorAll('li').length + 'か所';
+        tab.addEventListener('click', function () { select(i, false); });
+        tab.addEventListener('keydown', function (e) {
+          if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+          e.preventDefault();
+          select((i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length, true);
+        });
+      });
+
+      function select(i, focus) {
+        tabs.forEach(function (t, j) {
+          t.setAttribute('aria-selected', j === i ? 'true' : 'false');
+          t.tabIndex = j === i ? 0 : -1;
+        });
+        cards.forEach(function (c, j) { c.classList.toggle('is-active', j === i); });
+        block.setAttribute('data-area', keys[i]);
+        if (focus) tabs[i].focus();
+        document.dispatchEvent(new Event('tabchange'));   /* 表示された側の写真スライドの位置を合わせ直す */
+      }
+      select(0, false);
     })();
   </script>
 
